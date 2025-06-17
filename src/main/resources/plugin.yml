@@ -4,3 +4,19 @@ main: com.Lino.colorTheory.ColorTheory
 api-version: '1.21'
 author: Lino
 description: A plugin that restricts players to using blocks and items of their chosen team color
+
+commands:
+  team:
+    description: Opens the team selection menu or manages your team
+    usage: /<command> [reset]
+    aliases: [colorteam, ct]
+  colortheory:
+    description: Main plugin command
+    usage: /<command> [reload]
+    permission: colortheory.admin
+    aliases: [ctheory]
+
+permissions:
+  colortheory.admin:
+    description: Allows access to admin commands
+    default: op

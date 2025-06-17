@@ -1,15 +1,27 @@
 package com.Lino.colorTheory;
 
+import com.Lino.colorTheory.teams.BrownTeamMaterials;
+import com.Lino.colorTheory.teams.GrayTeamMaterials;
+import com.Lino.colorTheory.teams.YellowTeamMaterials;
+import com.Lino.colorTheory.teams.RedTeamMaterials;
+import com.Lino.colorTheory.teams.WhiteTeamMaterials;
+import com.Lino.colorTheory.teams.PurpleTeamMaterials;
+import com.Lino.colorTheory.teams.BlueTeamMaterials;
+import com.Lino.colorTheory.teams.GreenTeamMaterials;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,12 +34,16 @@ public class ColorTheory extends JavaPlugin implements Listener {
 
     private Connection connection;
     private Map<UUID, TeamColor> playerTeams = new HashMap<>();
+    private Set<UUID> playersNeedingTeam = new HashSet<>();
 
     @Override
     public void onEnable() {
+        getDataFolder().mkdirs();
         setupDatabase();
         loadPlayerTeams();
         getServer().getPluginManager().registerEvents(this, this);
+        getCommand("team").setExecutor(this);
+        getCommand("colortheory").setExecutor(this);
     }
 
     @Override
@@ -39,6 +55,45 @@ public class ColorTheory extends JavaPlugin implements Listener {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("This command can only be used by players!");
+            return true;
+        }
+
+        Player player = (Player) sender;
+
+        if (command.getName().equalsIgnoreCase("team")) {
+            if (args.length == 0) {
+                openTeamSelectionGUI(player);
+                return true;
+            }
+
+            if (args.length == 1 && args[0].equalsIgnoreCase("reset")) {
+                playerTeams.remove(player.getUniqueId());
+                removePlayerTeam(player.getUniqueId());
+                openTeamSelectionGUI(player);
+                player.sendMessage(ChatColor.YELLOW + "Your team has been reset. Please choose a new team!");
+                return true;
+            }
+        }
+
+        if (command.getName().equalsIgnoreCase("colortheory")) {
+            if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+                if (!player.hasPermission("colortheory.admin")) {
+                    player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+                    return true;
+                }
+                loadPlayerTeams();
+                player.sendMessage(ChatColor.GREEN + "ColorTheory reloaded!");
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void setupDatabase() {
@@ -53,6 +108,7 @@ public class ColorTheory extends JavaPlugin implements Listener {
     }
 
     private void loadPlayerTeams() {
+        playerTeams.clear();
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM player_teams");
@@ -80,11 +136,44 @@ public class ColorTheory extends JavaPlugin implements Listener {
         }
     }
 
-    @EventHandler
+    private void removePlayerTeam(UUID uuid) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM player_teams WHERE uuid = ?");
+            ps.setString(1, uuid.toString());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!playerTeams.containsKey(player.getUniqueId())) {
+        UUID uuid = player.getUniqueId();
+
+        if (!playerTeams.containsKey(uuid)) {
+            playersNeedingTeam.add(uuid);
+
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                if (player.isOnline() && playersNeedingTeam.contains(uuid)) {
+                    openTeamSelectionGUI(player);
+                    player.sendMessage(ChatColor.YELLOW + "Welcome! Please select your team color.");
+                    player.sendMessage(ChatColor.YELLOW + "You can also use " + ChatColor.GREEN + "/team" + ChatColor.YELLOW + " to open the team selection menu.");
+                }
+            }, 40L);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        if (playersNeedingTeam.contains(uuid) && !playerTeams.containsKey(uuid)) {
+            event.setCancelled(true);
             openTeamSelectionGUI(player);
+            player.sendMessage(ChatColor.RED + "You must select a team before moving!");
         }
     }
 
@@ -107,6 +196,10 @@ public class ColorTheory extends JavaPlugin implements Listener {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(team.getChatColor() + team.getDisplayName() + " Team");
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Click to join the " + team.getChatColor() + team.getDisplayName() + ChatColor.GRAY + " team!");
+        lore.add(ChatColor.GRAY + "You will only be able to use " + team.getChatColor() + team.getDisplayName().toLowerCase() + ChatColor.GRAY + " items.");
+        meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
     }
@@ -117,7 +210,7 @@ public class ColorTheory extends JavaPlugin implements Listener {
 
         event.setCancelled(true);
 
-        if (event.getCurrentItem() == null) return;
+        if (event.getCurrentItem() == null || !event.getCurrentItem().hasItemMeta()) return;
 
         Player player = (Player) event.getWhoClicked();
         Material clickedMaterial = event.getCurrentItem().getType();
@@ -153,6 +246,7 @@ public class ColorTheory extends JavaPlugin implements Listener {
 
         if (selectedTeam != null) {
             playerTeams.put(player.getUniqueId(), selectedTeam);
+            playersNeedingTeam.remove(player.getUniqueId());
             savePlayerTeam(player.getUniqueId(), selectedTeam);
             player.closeInventory();
             player.sendMessage(ChatColor.GREEN + "You have joined the " + selectedTeam.getChatColor() + selectedTeam.getDisplayName() + ChatColor.GREEN + " team!");
@@ -167,6 +261,7 @@ public class ColorTheory extends JavaPlugin implements Listener {
         if (team == null) {
             event.setCancelled(true);
             openTeamSelectionGUI(player);
+            player.sendMessage(ChatColor.RED + "You must select a team first! Use /team");
             return;
         }
 
@@ -187,6 +282,7 @@ public class ColorTheory extends JavaPlugin implements Listener {
         if (team == null) {
             event.setCancelled(true);
             openTeamSelectionGUI(player);
+            player.sendMessage(ChatColor.RED + "You must select a team first! Use /team");
             return;
         }
 
@@ -199,167 +295,23 @@ public class ColorTheory extends JavaPlugin implements Listener {
 }
 
 enum TeamColor {
-    BROWN("Brown", ChatColor.GOLD, new Material[]{
-            Material.BROWN_WOOL, Material.BROWN_CONCRETE, Material.BROWN_CONCRETE_POWDER,
-            Material.BROWN_TERRACOTTA, Material.BROWN_GLAZED_TERRACOTTA, Material.BROWN_STAINED_GLASS,
-            Material.BROWN_STAINED_GLASS_PANE, Material.BROWN_CARPET, Material.BROWN_BED,
-            Material.BROWN_BANNER, Material.BROWN_SHULKER_BOX, Material.BROWN_CANDLE,
-            Material.BROWN_DYE, Material.DIRT, Material.COARSE_DIRT, Material.PODZOL,
-            Material.DARK_OAK_LOG, Material.DARK_OAK_PLANKS, Material.DARK_OAK_WOOD,
-            Material.STRIPPED_DARK_OAK_LOG, Material.STRIPPED_DARK_OAK_WOOD,
-            Material.DARK_OAK_LEAVES, Material.DARK_OAK_SAPLING, Material.DARK_OAK_SIGN,
-            Material.DARK_OAK_DOOR, Material.DARK_OAK_TRAPDOOR, Material.DARK_OAK_FENCE,
-            Material.DARK_OAK_FENCE_GATE, Material.DARK_OAK_BUTTON, Material.DARK_OAK_PRESSURE_PLATE,
-            Material.DARK_OAK_SLAB, Material.DARK_OAK_STAIRS, Material.COCOA_BEANS,
-            Material.SOUL_SAND, Material.SOUL_SOIL
-    }),
-
-    GRAY("Gray", ChatColor.GRAY, new Material[]{
-            Material.GRAY_WOOL, Material.GRAY_CONCRETE, Material.GRAY_CONCRETE_POWDER,
-            Material.GRAY_TERRACOTTA, Material.GRAY_GLAZED_TERRACOTTA, Material.GRAY_STAINED_GLASS,
-            Material.GRAY_STAINED_GLASS_PANE, Material.GRAY_CARPET, Material.GRAY_BED,
-            Material.GRAY_BANNER, Material.GRAY_SHULKER_BOX, Material.GRAY_CANDLE,
-            Material.GRAY_DYE, Material.STONE, Material.COBBLESTONE, Material.STONE_BRICKS,
-            Material.CRACKED_STONE_BRICKS, Material.CHISELED_STONE_BRICKS, Material.SMOOTH_STONE,
-            Material.STONE_SLAB, Material.STONE_STAIRS, Material.COBBLESTONE_SLAB,
-            Material.COBBLESTONE_STAIRS, Material.STONE_BRICK_SLAB, Material.STONE_BRICK_STAIRS,
-            Material.ANDESITE, Material.POLISHED_ANDESITE, Material.GRAVEL, Material.FLINT,
-            Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE, Material.RAW_IRON,
-            Material.IRON_INGOT, Material.IRON_BLOCK, Material.IRON_NUGGET,
-            Material.LIGHT_GRAY_WOOL, Material.LIGHT_GRAY_CONCRETE, Material.LIGHT_GRAY_CONCRETE_POWDER,
-            Material.LIGHT_GRAY_TERRACOTTA, Material.LIGHT_GRAY_GLAZED_TERRACOTTA
-    }),
-
-    YELLOW("Yellow", ChatColor.YELLOW, new Material[]{
-            Material.YELLOW_WOOL, Material.YELLOW_CONCRETE, Material.YELLOW_CONCRETE_POWDER,
-            Material.YELLOW_TERRACOTTA, Material.YELLOW_GLAZED_TERRACOTTA, Material.YELLOW_STAINED_GLASS,
-            Material.YELLOW_STAINED_GLASS_PANE, Material.YELLOW_CARPET, Material.YELLOW_BED,
-            Material.YELLOW_BANNER, Material.YELLOW_SHULKER_BOX, Material.YELLOW_CANDLE,
-            Material.YELLOW_DYE, Material.GOLD_ORE, Material.DEEPSLATE_GOLD_ORE,
-            Material.RAW_GOLD, Material.GOLD_INGOT, Material.GOLD_BLOCK, Material.GOLD_NUGGET,
-            Material.GOLDEN_APPLE, Material.GOLDEN_CARROT, Material.GOLDEN_HELMET,
-            Material.GOLDEN_CHESTPLATE, Material.GOLDEN_LEGGINGS, Material.GOLDEN_BOOTS,
-            Material.GOLDEN_SWORD, Material.GOLDEN_PICKAXE, Material.GOLDEN_AXE,
-            Material.GOLDEN_SHOVEL, Material.GOLDEN_HOE, Material.SAND, Material.SANDSTONE,
-            Material.SMOOTH_SANDSTONE, Material.CUT_SANDSTONE, Material.CHISELED_SANDSTONE,
-            Material.SANDSTONE_SLAB, Material.SANDSTONE_STAIRS, Material.SANDSTONE_WALL,
-            Material.HAY_BLOCK, Material.SPONGE, Material.WET_SPONGE, Material.GLOWSTONE,
-            Material.GLOWSTONE_DUST, Material.HONEYCOMB, Material.HONEYCOMB_BLOCK,
-            Material.HONEY_BLOCK, Material.BEE_NEST, Material.BEEHIVE
-    }),
-
-    RED("Red", ChatColor.RED, new Material[]{
-            Material.RED_WOOL, Material.RED_CONCRETE, Material.RED_CONCRETE_POWDER,
-            Material.RED_TERRACOTTA, Material.RED_GLAZED_TERRACOTTA, Material.RED_STAINED_GLASS,
-            Material.RED_STAINED_GLASS_PANE, Material.RED_CARPET, Material.RED_BED,
-            Material.RED_BANNER, Material.RED_SHULKER_BOX, Material.RED_CANDLE,
-            Material.RED_DYE, Material.REDSTONE, Material.REDSTONE_BLOCK, Material.REDSTONE_ORE,
-            Material.DEEPSLATE_REDSTONE_ORE, Material.REDSTONE_TORCH, Material.REDSTONE_WIRE,
-            Material.REPEATER, Material.COMPARATOR, Material.REDSTONE_LAMP,
-            Material.TNT, Material.NETHER_WART, Material.NETHER_WART_BLOCK,
-            Material.RED_NETHER_BRICKS, Material.RED_NETHER_BRICK_SLAB,
-            Material.RED_NETHER_BRICK_STAIRS, Material.RED_NETHER_BRICK_WALL,
-            Material.CRIMSON_STEM, Material.CRIMSON_PLANKS, Material.CRIMSON_SLAB,
-            Material.CRIMSON_STAIRS, Material.CRIMSON_FENCE, Material.CRIMSON_FENCE_GATE,
-            Material.CRIMSON_DOOR, Material.CRIMSON_TRAPDOOR, Material.CRIMSON_SIGN,
-            Material.CRIMSON_BUTTON, Material.CRIMSON_PRESSURE_PLATE,
-            Material.RED_MUSHROOM, Material.RED_MUSHROOM_BLOCK, Material.APPLE,
-            Material.ENCHANTED_GOLDEN_APPLE
-    }),
-
-    WHITE("White", ChatColor.WHITE, new Material[]{
-            Material.WHITE_WOOL, Material.WHITE_CONCRETE, Material.WHITE_CONCRETE_POWDER,
-            Material.WHITE_TERRACOTTA, Material.WHITE_GLAZED_TERRACOTTA, Material.WHITE_STAINED_GLASS,
-            Material.WHITE_STAINED_GLASS_PANE, Material.WHITE_CARPET, Material.WHITE_BED,
-            Material.WHITE_BANNER, Material.WHITE_SHULKER_BOX, Material.WHITE_CANDLE,
-            Material.WHITE_DYE, Material.BONE, Material.BONE_BLOCK, Material.BONE_MEAL,
-            Material.QUARTZ, Material.QUARTZ_BLOCK, Material.QUARTZ_BRICKS,
-            Material.QUARTZ_PILLAR, Material.CHISELED_QUARTZ_BLOCK, Material.SMOOTH_QUARTZ,
-            Material.QUARTZ_SLAB, Material.QUARTZ_STAIRS, Material.NETHER_QUARTZ_ORE,
-            Material.DIORITE, Material.POLISHED_DIORITE, Material.BIRCH_LOG,
-            Material.BIRCH_PLANKS, Material.BIRCH_WOOD, Material.STRIPPED_BIRCH_LOG,
-            Material.STRIPPED_BIRCH_WOOD, Material.BIRCH_LEAVES, Material.BIRCH_SAPLING,
-            Material.BIRCH_SIGN, Material.BIRCH_DOOR, Material.BIRCH_TRAPDOOR,
-            Material.BIRCH_FENCE, Material.BIRCH_FENCE_GATE, Material.BIRCH_BUTTON,
-            Material.BIRCH_PRESSURE_PLATE, Material.BIRCH_SLAB, Material.BIRCH_STAIRS,
-            Material.IRON_BARS, Material.SNOW, Material.SNOW_BLOCK, Material.SNOWBALL,
-            Material.POWDER_SNOW_BUCKET, Material.STRING, Material.COBWEB
-    }),
-
-    PURPLE("Purple", ChatColor.DARK_PURPLE, new Material[]{
-            Material.PURPLE_WOOL, Material.PURPLE_CONCRETE, Material.PURPLE_CONCRETE_POWDER,
-            Material.PURPLE_TERRACOTTA, Material.PURPLE_GLAZED_TERRACOTTA, Material.PURPLE_STAINED_GLASS,
-            Material.PURPLE_STAINED_GLASS_PANE, Material.PURPLE_CARPET, Material.PURPLE_BED,
-            Material.PURPLE_BANNER, Material.PURPLE_SHULKER_BOX, Material.PURPLE_CANDLE,
-            Material.PURPLE_DYE, Material.CHORUS_PLANT, Material.CHORUS_FLOWER,
-            Material.CHORUS_FRUIT, Material.POPPED_CHORUS_FRUIT, Material.PURPUR_BLOCK,
-            Material.PURPUR_PILLAR, Material.PURPUR_SLAB, Material.PURPUR_STAIRS,
-            Material.END_STONE, Material.END_STONE_BRICKS, Material.END_STONE_BRICK_SLAB,
-            Material.END_STONE_BRICK_STAIRS, Material.END_STONE_BRICK_WALL,
-            Material.ENDER_PEARL, Material.ENDER_EYE, Material.END_CRYSTAL,
-            Material.SHULKER_SHELL, Material.MAGENTA_WOOL, Material.MAGENTA_CONCRETE,
-            Material.MAGENTA_CONCRETE_POWDER, Material.MAGENTA_TERRACOTTA,
-            Material.MAGENTA_GLAZED_TERRACOTTA, Material.MAGENTA_STAINED_GLASS,
-            Material.MAGENTA_STAINED_GLASS_PANE, Material.MAGENTA_CARPET,
-            Material.MAGENTA_BED, Material.MAGENTA_BANNER, Material.MAGENTA_SHULKER_BOX,
-            Material.MAGENTA_CANDLE, Material.MAGENTA_DYE, Material.OBSIDIAN,
-            Material.CRYING_OBSIDIAN, Material.RESPAWN_ANCHOR, Material.AMETHYST_SHARD,
-            Material.AMETHYST_BLOCK, Material.BUDDING_AMETHYST, Material.AMETHYST_CLUSTER
-    }),
-
-    BLUE("Blue", ChatColor.BLUE, new Material[]{
-            Material.BLUE_WOOL, Material.BLUE_CONCRETE, Material.BLUE_CONCRETE_POWDER,
-            Material.BLUE_TERRACOTTA, Material.BLUE_GLAZED_TERRACOTTA, Material.BLUE_STAINED_GLASS,
-            Material.BLUE_STAINED_GLASS_PANE, Material.BLUE_CARPET, Material.BLUE_BED,
-            Material.BLUE_BANNER, Material.BLUE_SHULKER_BOX, Material.BLUE_CANDLE,
-            Material.BLUE_DYE, Material.LAPIS_LAZULI, Material.LAPIS_BLOCK,
-            Material.LAPIS_ORE, Material.DEEPSLATE_LAPIS_ORE, Material.WATER_BUCKET,
-            Material.ICE, Material.PACKED_ICE, Material.BLUE_ICE, Material.PRISMARINE,
-            Material.PRISMARINE_BRICKS, Material.DARK_PRISMARINE, Material.PRISMARINE_SLAB,
-            Material.PRISMARINE_STAIRS, Material.PRISMARINE_BRICK_SLAB,
-            Material.PRISMARINE_BRICK_STAIRS, Material.DARK_PRISMARINE_SLAB,
-            Material.DARK_PRISMARINE_STAIRS, Material.PRISMARINE_WALL,
-            Material.PRISMARINE_SHARD, Material.PRISMARINE_CRYSTALS,
-            Material.WARPED_STEM, Material.WARPED_PLANKS, Material.WARPED_SLAB,
-            Material.WARPED_STAIRS, Material.WARPED_FENCE, Material.WARPED_FENCE_GATE,
-            Material.WARPED_DOOR, Material.WARPED_TRAPDOOR, Material.WARPED_SIGN,
-            Material.WARPED_BUTTON, Material.WARPED_PRESSURE_PLATE,
-            Material.LIGHT_BLUE_WOOL, Material.LIGHT_BLUE_CONCRETE,
-            Material.LIGHT_BLUE_CONCRETE_POWDER, Material.LIGHT_BLUE_TERRACOTTA,
-            Material.LIGHT_BLUE_GLAZED_TERRACOTTA, Material.CYAN_WOOL,
-            Material.CYAN_CONCRETE, Material.CYAN_CONCRETE_POWDER,
-            Material.CYAN_TERRACOTTA, Material.CYAN_GLAZED_TERRACOTTA
-    }),
-
-    GREEN("Green", ChatColor.GREEN, new Material[]{
-            Material.GREEN_WOOL, Material.GREEN_CONCRETE, Material.GREEN_CONCRETE_POWDER,
-            Material.GREEN_TERRACOTTA, Material.GREEN_GLAZED_TERRACOTTA, Material.GREEN_STAINED_GLASS,
-            Material.GREEN_STAINED_GLASS_PANE, Material.GREEN_CARPET, Material.GREEN_BED,
-            Material.GREEN_BANNER, Material.GREEN_SHULKER_BOX, Material.GREEN_CANDLE,
-            Material.GREEN_DYE, Material.EMERALD, Material.EMERALD_BLOCK,
-            Material.EMERALD_ORE, Material.DEEPSLATE_EMERALD_ORE, Material.GRASS_BLOCK,
-            Material.MOSS_BLOCK, Material.MOSS_CARPET, Material.OAK_LEAVES,
-            Material.SPRUCE_LEAVES, Material.JUNGLE_LEAVES, Material.ACACIA_LEAVES,
-            Material.MANGROVE_LEAVES, Material.OAK_SAPLING, Material.SPRUCE_SAPLING,
-            Material.JUNGLE_SAPLING, Material.ACACIA_SAPLING, Material.MANGROVE_PROPAGULE,
-            Material.CACTUS, Material.SUGAR_CANE, Material.BAMBOO, Material.KELP,
-            Material.SEA_PICKLE, Material.LILY_PAD, Material.VINE, Material.FERN,
-            Material.LARGE_FERN, Material.SEAGRASS, Material.TALL_SEAGRASS,
-            Material.LIME_WOOL, Material.LIME_CONCRETE, Material.LIME_CONCRETE_POWDER,
-            Material.LIME_TERRACOTTA, Material.LIME_GLAZED_TERRACOTTA,
-            Material.LIME_STAINED_GLASS, Material.LIME_STAINED_GLASS_PANE,
-            Material.SLIME_BALL, Material.SLIME_BLOCK, Material.EXPERIENCE_BOTTLE,
-            Material.TURTLE_EGG, Material.TURTLE_SCUTE, Material.CREEPER_HEAD
-    });
+    BROWN("Brown", ChatColor.GOLD, BrownTeamMaterials.getMaterials()),
+    GRAY("Gray", ChatColor.GRAY, GrayTeamMaterials.getMaterials()),
+    YELLOW("Yellow", ChatColor.YELLOW, YellowTeamMaterials.getMaterials()),
+    RED("Red", ChatColor.RED, RedTeamMaterials.getMaterials()),
+    WHITE("White", ChatColor.WHITE, WhiteTeamMaterials.getMaterials()),
+    PURPLE("Purple", ChatColor.DARK_PURPLE, PurpleTeamMaterials.getMaterials()),
+    BLUE("Blue", ChatColor.BLUE, BlueTeamMaterials.getMaterials()),
+    GREEN("Green", ChatColor.GREEN, GreenTeamMaterials.getMaterials());
 
     private final String displayName;
     private final ChatColor chatColor;
     private final Set<Material> allowedMaterials;
 
-    TeamColor(String displayName, ChatColor chatColor, Material[] materials) {
+    TeamColor(String displayName, ChatColor chatColor, Set<Material> materials) {
         this.displayName = displayName;
         this.chatColor = chatColor;
-        this.allowedMaterials = new HashSet<>(Arrays.asList(materials));
+        this.allowedMaterials = materials;
     }
 
     public String getDisplayName() {
