@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -35,6 +37,7 @@ public class ColorTheory extends JavaPlugin implements Listener {
     private Connection connection;
     private Map<UUID, TeamColor> playerTeams = new HashMap<>();
     private Set<UUID> playersNeedingTeam = new HashSet<>();
+    private Map<UUID, Material> blocksBrokenByPlayer = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -269,6 +272,37 @@ public class ColorTheory extends JavaPlugin implements Listener {
         if (!team.isAllowedMaterial(blockType)) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You can only place " + team.getDisplayName().toLowerCase() + " blocks!");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBlockBreak(BlockBreakEvent event) {
+        Player player = event.getPlayer();
+        TeamColor team = playerTeams.get(player.getUniqueId());
+
+        if (team == null) {
+            event.setCancelled(true);
+            openTeamSelectionGUI(player);
+            player.sendMessage(ChatColor.RED + "You must select a team first! Use /team");
+            return;
+        }
+
+        Material blockType = event.getBlock().getType();
+        if (!team.isAllowedMaterial(blockType)) {
+            blocksBrokenByPlayer.put(player.getUniqueId(), blockType);
+            event.setDropItems(false);
+            event.setExpToDrop(0);
+            player.sendMessage(ChatColor.RED + "You broke a " + blockType.name().toLowerCase().replace("_", " ") + " which is not from your team. No drops!");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBlockDropItem(BlockDropItemEvent event) {
+        Player player = event.getPlayer();
+        Material brokenBlock = blocksBrokenByPlayer.remove(player.getUniqueId());
+
+        if (brokenBlock != null) {
+            event.setCancelled(true);
         }
     }
 
