@@ -207,7 +207,6 @@ public class BlueTeamMaterials {
         materials.add(Material.SEA_PICKLE);
 
         materials.add(Material.TURTLE_HELMET);
-        materials.add(Material.SCUTE);
         materials.add(Material.TURTLE_EGG);
         materials.add(Material.PHANTOM_MEMBRANE);
         materials.add(Material.ELYTRA);

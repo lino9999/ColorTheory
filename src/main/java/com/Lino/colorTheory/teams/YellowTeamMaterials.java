@@ -239,8 +239,6 @@ public class YellowTeamMaterials {
         materials.add(Material.FLETCHING_TABLE);
         materials.add(Material.CARTOGRAPHY_TABLE);
 
-        materials.add(Material.BUTTER_BLOCK);
-
         return materials;
     }
 }

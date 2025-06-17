@@ -250,7 +250,6 @@ public class RedTeamMaterials {
         materials.add(Material.SHEEP_SPAWN_EGG);
         materials.add(Material.WOLF_SPAWN_EGG);
         materials.add(Material.FOX_SPAWN_EGG);
-        materials.add(Material.MUSHROOM_COW_SPAWN_EGG);
         materials.add(Material.CREEPER_SPAWN_EGG);
         materials.add(Material.PIGLIN_SPAWN_EGG);
         materials.add(Material.PIGLIN_BRUTE_SPAWN_EGG);

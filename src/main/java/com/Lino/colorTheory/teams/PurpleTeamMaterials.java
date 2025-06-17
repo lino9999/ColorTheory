@@ -148,7 +148,6 @@ public class PurpleTeamMaterials {
         materials.add(Material.HANGING_ROOTS);
         materials.add(Material.BIG_DRIPLEAF);
         materials.add(Material.SMALL_DRIPLEAF);
-        materials.add(Material.DRIPLEAF_STEM);
 
         materials.add(Material.SWEET_BERRIES);
         materials.add(Material.SWEET_BERRY_BUSH);
@@ -265,11 +264,8 @@ public class PurpleTeamMaterials {
         materials.add(Material.WITHER_SPAWN_EGG);
 
         materials.add(Material.POTTED_ALLIUM);
-        materials.add(Material.POTTED_LILAC);
         materials.add(Material.POTTED_PINK_TULIP);
         materials.add(Material.POTTED_WITHER_ROSE);
-        materials.add(Material.POTTED_AZALEA);
-        materials.add(Material.POTTED_FLOWERING_AZALEA);
         materials.add(Material.POTTED_WARPED_FUNGUS);
         materials.add(Material.POTTED_WARPED_ROOTS);
         materials.add(Material.POTTED_CHERRY_SAPLING);

@@ -197,7 +197,7 @@ public class WhiteTeamMaterials {
         materials.add(Material.GLOW_ITEM_FRAME);
         materials.add(Material.PAINTING);
 
-        materials.add(Material.NAMETAG);
+        materials.add(Material.NAME_TAG);
         materials.add(Material.LEAD);
         materials.add(Material.FEATHER);
         materials.add(Material.LEATHER);

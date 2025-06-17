@@ -42,7 +42,6 @@ public class GreenTeamMaterials {
         materials.add(Material.DEEPSLATE_EMERALD_ORE);
 
         materials.add(Material.GRASS_BLOCK);
-        materials.add(Material.GRASS);
         materials.add(Material.TALL_GRASS);
         materials.add(Material.SHORT_GRASS);
         materials.add(Material.MOSS_BLOCK);
@@ -140,7 +139,6 @@ public class GreenTeamMaterials {
         materials.add(Material.HANGING_ROOTS);
         materials.add(Material.BIG_DRIPLEAF);
         materials.add(Material.SMALL_DRIPLEAF);
-        materials.add(Material.DRIPLEAF_STEM);
         materials.add(Material.CAVE_VINES);
         materials.add(Material.CAVE_VINES_PLANT);
         materials.add(Material.SPORE_BLOSSOM);
@@ -152,10 +150,8 @@ public class GreenTeamMaterials {
         materials.add(Material.SLIME_SPAWN_EGG);
 
         materials.add(Material.EXPERIENCE_BOTTLE);
-        materials.add(Material.EXPERIENCE_ORB);
 
         materials.add(Material.TURTLE_EGG);
-        materials.add(Material.SCUTE);
         materials.add(Material.TURTLE_HELMET);
         materials.add(Material.TURTLE_SPAWN_EGG);
 
@@ -337,8 +333,6 @@ public class GreenTeamMaterials {
         materials.add(Material.POTTED_DARK_OAK_SAPLING);
         materials.add(Material.POTTED_MANGROVE_PROPAGULE);
         materials.add(Material.POTTED_CHERRY_SAPLING);
-        materials.add(Material.POTTED_AZALEA);
-        materials.add(Material.POTTED_FLOWERING_AZALEA);
         materials.add(Material.POTTED_FERN);
         materials.add(Material.POTTED_CACTUS);
         materials.add(Material.POTTED_BAMBOO);

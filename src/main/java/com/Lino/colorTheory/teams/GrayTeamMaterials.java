@@ -111,17 +111,14 @@ public class GrayTeamMaterials {
         materials.add(Material.CHISELED_DEEPSLATE);
         materials.add(Material.CRACKED_DEEPSLATE_TILES);
         materials.add(Material.CRACKED_DEEPSLATE_BRICKS);
-        materials.add(Material.DEEPSLATE_SLAB);
         materials.add(Material.COBBLED_DEEPSLATE_SLAB);
         materials.add(Material.POLISHED_DEEPSLATE_SLAB);
         materials.add(Material.DEEPSLATE_TILE_SLAB);
         materials.add(Material.DEEPSLATE_BRICK_SLAB);
-        materials.add(Material.DEEPSLATE_STAIRS);
         materials.add(Material.COBBLED_DEEPSLATE_STAIRS);
         materials.add(Material.POLISHED_DEEPSLATE_STAIRS);
         materials.add(Material.DEEPSLATE_TILE_STAIRS);
         materials.add(Material.DEEPSLATE_BRICK_STAIRS);
-        materials.add(Material.DEEPSLATE_WALL);
         materials.add(Material.COBBLED_DEEPSLATE_WALL);
         materials.add(Material.POLISHED_DEEPSLATE_WALL);
         materials.add(Material.DEEPSLATE_TILE_WALL);
