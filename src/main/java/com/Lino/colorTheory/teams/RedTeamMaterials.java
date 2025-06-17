@@ -46,7 +46,6 @@ public class RedTeamMaterials {
         materials.add(Material.ACACIA_PRESSURE_PLATE);
         materials.add(Material.DARK_OAK_PRESSURE_PLATE);
         materials.add(Material.MANGROVE_PRESSURE_PLATE);
-        materials.add(Material.CHERRY_PRESSURE_PLATE);
         materials.add(Material.BAMBOO_PRESSURE_PLATE);
         materials.add(Material.CRIMSON_PRESSURE_PLATE);
         materials.add(Material.WARPED_PRESSURE_PLATE);
@@ -108,42 +107,6 @@ public class RedTeamMaterials {
         materials.add(Material.SWEET_BERRIES);
         materials.add(Material.SWEET_BERRY_BUSH);
 
-        materials.add(Material.PINK_WOOL);
-        materials.add(Material.PINK_CONCRETE);
-        materials.add(Material.PINK_CONCRETE_POWDER);
-        materials.add(Material.PINK_TERRACOTTA);
-        materials.add(Material.PINK_GLAZED_TERRACOTTA);
-        materials.add(Material.PINK_STAINED_GLASS);
-        materials.add(Material.PINK_STAINED_GLASS_PANE);
-        materials.add(Material.PINK_CARPET);
-        materials.add(Material.PINK_BED);
-        materials.add(Material.PINK_BANNER);
-        materials.add(Material.PINK_SHULKER_BOX);
-        materials.add(Material.PINK_CANDLE);
-        materials.add(Material.PINK_DYE);
-        materials.add(Material.PINK_TULIP);
-        materials.add(Material.PINK_PETALS);
-
-        materials.add(Material.CHERRY_LOG);
-        materials.add(Material.CHERRY_WOOD);
-        materials.add(Material.STRIPPED_CHERRY_LOG);
-        materials.add(Material.STRIPPED_CHERRY_WOOD);
-        materials.add(Material.CHERRY_PLANKS);
-        materials.add(Material.CHERRY_SLAB);
-        materials.add(Material.CHERRY_STAIRS);
-        materials.add(Material.CHERRY_FENCE);
-        materials.add(Material.CHERRY_FENCE_GATE);
-        materials.add(Material.CHERRY_DOOR);
-        materials.add(Material.CHERRY_TRAPDOOR);
-        materials.add(Material.CHERRY_SIGN);
-        materials.add(Material.CHERRY_HANGING_SIGN);
-        materials.add(Material.CHERRY_BUTTON);
-        materials.add(Material.CHERRY_PRESSURE_PLATE);
-        materials.add(Material.CHERRY_LEAVES);
-        materials.add(Material.CHERRY_SAPLING);
-        materials.add(Material.CHERRY_BOAT);
-        materials.add(Material.CHERRY_CHEST_BOAT);
-
         materials.add(Material.MAGMA_BLOCK);
         materials.add(Material.MAGMA_CREAM);
         materials.add(Material.MAGMA_CUBE_SPAWN_EGG);
@@ -190,47 +153,6 @@ public class RedTeamMaterials {
         materials.add(Material.RED_SANDSTONE_STAIRS);
         materials.add(Material.SMOOTH_RED_SANDSTONE_STAIRS);
         materials.add(Material.RED_SANDSTONE_WALL);
-
-        materials.add(Material.COPPER_ORE);
-        materials.add(Material.DEEPSLATE_COPPER_ORE);
-        materials.add(Material.RAW_COPPER);
-        materials.add(Material.COPPER_INGOT);
-        materials.add(Material.COPPER_BLOCK);
-        materials.add(Material.EXPOSED_COPPER);
-        materials.add(Material.CUT_COPPER);
-        materials.add(Material.EXPOSED_CUT_COPPER);
-        materials.add(Material.CUT_COPPER_SLAB);
-        materials.add(Material.EXPOSED_CUT_COPPER_SLAB);
-        materials.add(Material.CUT_COPPER_STAIRS);
-        materials.add(Material.EXPOSED_CUT_COPPER_STAIRS);
-        materials.add(Material.CHISELED_COPPER);
-        materials.add(Material.EXPOSED_CHISELED_COPPER);
-        materials.add(Material.COPPER_DOOR);
-        materials.add(Material.EXPOSED_COPPER_DOOR);
-        materials.add(Material.COPPER_TRAPDOOR);
-        materials.add(Material.EXPOSED_COPPER_TRAPDOOR);
-        materials.add(Material.COPPER_GRATE);
-        materials.add(Material.EXPOSED_COPPER_GRATE);
-        materials.add(Material.COPPER_BULB);
-        materials.add(Material.EXPOSED_COPPER_BULB);
-        materials.add(Material.WAXED_COPPER_BLOCK);
-        materials.add(Material.WAXED_EXPOSED_COPPER);
-        materials.add(Material.WAXED_CUT_COPPER);
-        materials.add(Material.WAXED_EXPOSED_CUT_COPPER);
-        materials.add(Material.WAXED_CUT_COPPER_SLAB);
-        materials.add(Material.WAXED_EXPOSED_CUT_COPPER_SLAB);
-        materials.add(Material.WAXED_CUT_COPPER_STAIRS);
-        materials.add(Material.WAXED_EXPOSED_CUT_COPPER_STAIRS);
-        materials.add(Material.WAXED_CHISELED_COPPER);
-        materials.add(Material.WAXED_EXPOSED_CHISELED_COPPER);
-        materials.add(Material.WAXED_COPPER_DOOR);
-        materials.add(Material.WAXED_EXPOSED_COPPER_DOOR);
-        materials.add(Material.WAXED_COPPER_TRAPDOOR);
-        materials.add(Material.WAXED_EXPOSED_COPPER_TRAPDOOR);
-        materials.add(Material.WAXED_COPPER_GRATE);
-        materials.add(Material.WAXED_EXPOSED_COPPER_GRATE);
-        materials.add(Material.WAXED_COPPER_BULB);
-        materials.add(Material.WAXED_EXPOSED_COPPER_BULB);
 
         materials.add(Material.PORKCHOP);
         materials.add(Material.COOKED_PORKCHOP);
@@ -284,7 +206,6 @@ public class RedTeamMaterials {
         materials.add(Material.POTTED_RED_MUSHROOM);
         materials.add(Material.POTTED_CRIMSON_FUNGUS);
         materials.add(Material.POTTED_CRIMSON_ROOTS);
-        materials.add(Material.POTTED_CHERRY_SAPLING);
 
         materials.add(Material.MUSIC_DISC_13);
         materials.add(Material.MUSIC_DISC_BLOCKS);

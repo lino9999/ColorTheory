@@ -46,26 +46,6 @@ public class WhiteTeamMaterials {
         materials.add(Material.POLISHED_DIORITE_STAIRS);
         materials.add(Material.DIORITE_WALL);
 
-        materials.add(Material.BIRCH_LOG);
-        materials.add(Material.BIRCH_WOOD);
-        materials.add(Material.STRIPPED_BIRCH_LOG);
-        materials.add(Material.STRIPPED_BIRCH_WOOD);
-        materials.add(Material.BIRCH_PLANKS);
-        materials.add(Material.BIRCH_SLAB);
-        materials.add(Material.BIRCH_STAIRS);
-        materials.add(Material.BIRCH_FENCE);
-        materials.add(Material.BIRCH_FENCE_GATE);
-        materials.add(Material.BIRCH_DOOR);
-        materials.add(Material.BIRCH_TRAPDOOR);
-        materials.add(Material.BIRCH_SIGN);
-        materials.add(Material.BIRCH_HANGING_SIGN);
-        materials.add(Material.BIRCH_BUTTON);
-        materials.add(Material.BIRCH_PRESSURE_PLATE);
-        materials.add(Material.BIRCH_LEAVES);
-        materials.add(Material.BIRCH_SAPLING);
-        materials.add(Material.BIRCH_BOAT);
-        materials.add(Material.BIRCH_CHEST_BOAT);
-
         materials.add(Material.IRON_BARS);
         materials.add(Material.IRON_DOOR);
         materials.add(Material.IRON_TRAPDOOR);
@@ -106,9 +86,7 @@ public class WhiteTeamMaterials {
         materials.add(Material.WRITTEN_BOOK);
         materials.add(Material.ENCHANTED_BOOK);
         materials.add(Material.KNOWLEDGE_BOOK);
-        materials.add(Material.BOOKSHELF);
         materials.add(Material.CHISELED_BOOKSHELF);
-        materials.add(Material.LECTERN);
         materials.add(Material.ENCHANTING_TABLE);
 
         materials.add(Material.MILK_BUCKET);
@@ -261,7 +239,6 @@ public class WhiteTeamMaterials {
         materials.add(Material.POTTED_OXEYE_DAISY);
         materials.add(Material.POTTED_LILY_OF_THE_VALLEY);
         materials.add(Material.POTTED_AZURE_BLUET);
-        materials.add(Material.POTTED_BIRCH_SAPLING);
 
         return materials;
     }

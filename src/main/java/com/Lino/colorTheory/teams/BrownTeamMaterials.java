@@ -31,6 +31,60 @@ public class BrownTeamMaterials {
         materials.add(Material.FARMLAND);
         materials.add(Material.ROOTED_DIRT);
 
+        materials.add(Material.OAK_LOG);
+        materials.add(Material.OAK_WOOD);
+        materials.add(Material.STRIPPED_OAK_LOG);
+        materials.add(Material.STRIPPED_OAK_WOOD);
+        materials.add(Material.OAK_PLANKS);
+        materials.add(Material.OAK_SLAB);
+        materials.add(Material.OAK_STAIRS);
+        materials.add(Material.OAK_FENCE);
+        materials.add(Material.OAK_FENCE_GATE);
+        materials.add(Material.OAK_DOOR);
+        materials.add(Material.OAK_TRAPDOOR);
+        materials.add(Material.OAK_SIGN);
+        materials.add(Material.OAK_HANGING_SIGN);
+        materials.add(Material.OAK_BUTTON);
+        materials.add(Material.OAK_PRESSURE_PLATE);
+        materials.add(Material.OAK_BOAT);
+        materials.add(Material.OAK_CHEST_BOAT);
+
+        materials.add(Material.SPRUCE_LOG);
+        materials.add(Material.SPRUCE_WOOD);
+        materials.add(Material.STRIPPED_SPRUCE_LOG);
+        materials.add(Material.STRIPPED_SPRUCE_WOOD);
+        materials.add(Material.SPRUCE_PLANKS);
+        materials.add(Material.SPRUCE_SLAB);
+        materials.add(Material.SPRUCE_STAIRS);
+        materials.add(Material.SPRUCE_FENCE);
+        materials.add(Material.SPRUCE_FENCE_GATE);
+        materials.add(Material.SPRUCE_DOOR);
+        materials.add(Material.SPRUCE_TRAPDOOR);
+        materials.add(Material.SPRUCE_SIGN);
+        materials.add(Material.SPRUCE_HANGING_SIGN);
+        materials.add(Material.SPRUCE_BUTTON);
+        materials.add(Material.SPRUCE_PRESSURE_PLATE);
+        materials.add(Material.SPRUCE_BOAT);
+        materials.add(Material.SPRUCE_CHEST_BOAT);
+
+        materials.add(Material.JUNGLE_LOG);
+        materials.add(Material.JUNGLE_WOOD);
+        materials.add(Material.STRIPPED_JUNGLE_LOG);
+        materials.add(Material.STRIPPED_JUNGLE_WOOD);
+        materials.add(Material.JUNGLE_PLANKS);
+        materials.add(Material.JUNGLE_SLAB);
+        materials.add(Material.JUNGLE_STAIRS);
+        materials.add(Material.JUNGLE_FENCE);
+        materials.add(Material.JUNGLE_FENCE_GATE);
+        materials.add(Material.JUNGLE_DOOR);
+        materials.add(Material.JUNGLE_TRAPDOOR);
+        materials.add(Material.JUNGLE_SIGN);
+        materials.add(Material.JUNGLE_HANGING_SIGN);
+        materials.add(Material.JUNGLE_BUTTON);
+        materials.add(Material.JUNGLE_PRESSURE_PLATE);
+        materials.add(Material.JUNGLE_BOAT);
+        materials.add(Material.JUNGLE_CHEST_BOAT);
+
         materials.add(Material.DARK_OAK_LOG);
         materials.add(Material.DARK_OAK_WOOD);
         materials.add(Material.STRIPPED_DARK_OAK_LOG);
@@ -46,8 +100,6 @@ public class BrownTeamMaterials {
         materials.add(Material.DARK_OAK_HANGING_SIGN);
         materials.add(Material.DARK_OAK_BUTTON);
         materials.add(Material.DARK_OAK_PRESSURE_PLATE);
-        materials.add(Material.DARK_OAK_LEAVES);
-        materials.add(Material.DARK_OAK_SAPLING);
         materials.add(Material.DARK_OAK_BOAT);
         materials.add(Material.DARK_OAK_CHEST_BOAT);
 
@@ -68,8 +120,6 @@ public class BrownTeamMaterials {
         materials.add(Material.MANGROVE_PRESSURE_PLATE);
         materials.add(Material.MANGROVE_ROOTS);
         materials.add(Material.MUDDY_MANGROVE_ROOTS);
-        materials.add(Material.MANGROVE_LEAVES);
-        materials.add(Material.MANGROVE_PROPAGULE);
         materials.add(Material.MANGROVE_BOAT);
         materials.add(Material.MANGROVE_CHEST_BOAT);
 
@@ -122,54 +172,40 @@ public class BrownTeamMaterials {
         materials.add(Material.COPPER_INGOT);
         materials.add(Material.COPPER_BLOCK);
         materials.add(Material.EXPOSED_COPPER);
-        materials.add(Material.WEATHERED_COPPER);
-        materials.add(Material.OXIDIZED_COPPER);
         materials.add(Material.CUT_COPPER);
         materials.add(Material.EXPOSED_CUT_COPPER);
-        materials.add(Material.WEATHERED_CUT_COPPER);
-        materials.add(Material.OXIDIZED_CUT_COPPER);
         materials.add(Material.CUT_COPPER_SLAB);
         materials.add(Material.EXPOSED_CUT_COPPER_SLAB);
-        materials.add(Material.WEATHERED_CUT_COPPER_SLAB);
-        materials.add(Material.OXIDIZED_CUT_COPPER_SLAB);
         materials.add(Material.CUT_COPPER_STAIRS);
         materials.add(Material.EXPOSED_CUT_COPPER_STAIRS);
-        materials.add(Material.WEATHERED_CUT_COPPER_STAIRS);
-        materials.add(Material.OXIDIZED_CUT_COPPER_STAIRS);
         materials.add(Material.CHISELED_COPPER);
         materials.add(Material.EXPOSED_CHISELED_COPPER);
-        materials.add(Material.WEATHERED_CHISELED_COPPER);
-        materials.add(Material.OXIDIZED_CHISELED_COPPER);
         materials.add(Material.COPPER_DOOR);
         materials.add(Material.EXPOSED_COPPER_DOOR);
-        materials.add(Material.WEATHERED_COPPER_DOOR);
-        materials.add(Material.OXIDIZED_COPPER_DOOR);
         materials.add(Material.COPPER_TRAPDOOR);
         materials.add(Material.EXPOSED_COPPER_TRAPDOOR);
-        materials.add(Material.WEATHERED_COPPER_TRAPDOOR);
-        materials.add(Material.OXIDIZED_COPPER_TRAPDOOR);
         materials.add(Material.COPPER_GRATE);
         materials.add(Material.EXPOSED_COPPER_GRATE);
-        materials.add(Material.WEATHERED_COPPER_GRATE);
-        materials.add(Material.OXIDIZED_COPPER_GRATE);
         materials.add(Material.COPPER_BULB);
         materials.add(Material.EXPOSED_COPPER_BULB);
-        materials.add(Material.WEATHERED_COPPER_BULB);
-        materials.add(Material.OXIDIZED_COPPER_BULB);
-
-        materials.add(Material.ORANGE_WOOL);
-        materials.add(Material.ORANGE_CONCRETE);
-        materials.add(Material.ORANGE_CONCRETE_POWDER);
-        materials.add(Material.ORANGE_TERRACOTTA);
-        materials.add(Material.ORANGE_GLAZED_TERRACOTTA);
-        materials.add(Material.ORANGE_STAINED_GLASS);
-        materials.add(Material.ORANGE_STAINED_GLASS_PANE);
-        materials.add(Material.ORANGE_CARPET);
-        materials.add(Material.ORANGE_BED);
-        materials.add(Material.ORANGE_BANNER);
-        materials.add(Material.ORANGE_SHULKER_BOX);
-        materials.add(Material.ORANGE_CANDLE);
-        materials.add(Material.ORANGE_DYE);
+        materials.add(Material.WAXED_COPPER_BLOCK);
+        materials.add(Material.WAXED_EXPOSED_COPPER);
+        materials.add(Material.WAXED_CUT_COPPER);
+        materials.add(Material.WAXED_EXPOSED_CUT_COPPER);
+        materials.add(Material.WAXED_CUT_COPPER_SLAB);
+        materials.add(Material.WAXED_EXPOSED_CUT_COPPER_SLAB);
+        materials.add(Material.WAXED_CUT_COPPER_STAIRS);
+        materials.add(Material.WAXED_EXPOSED_CUT_COPPER_STAIRS);
+        materials.add(Material.WAXED_CHISELED_COPPER);
+        materials.add(Material.WAXED_EXPOSED_CHISELED_COPPER);
+        materials.add(Material.WAXED_COPPER_DOOR);
+        materials.add(Material.WAXED_EXPOSED_COPPER_DOOR);
+        materials.add(Material.WAXED_COPPER_TRAPDOOR);
+        materials.add(Material.WAXED_EXPOSED_COPPER_TRAPDOOR);
+        materials.add(Material.WAXED_COPPER_GRATE);
+        materials.add(Material.WAXED_EXPOSED_COPPER_GRATE);
+        materials.add(Material.WAXED_COPPER_BULB);
+        materials.add(Material.WAXED_EXPOSED_COPPER_BULB);
 
         materials.add(Material.ACACIA_LOG);
         materials.add(Material.ACACIA_WOOD);
@@ -186,8 +222,6 @@ public class BrownTeamMaterials {
         materials.add(Material.ACACIA_HANGING_SIGN);
         materials.add(Material.ACACIA_BUTTON);
         materials.add(Material.ACACIA_PRESSURE_PLATE);
-        materials.add(Material.ACACIA_LEAVES);
-        materials.add(Material.ACACIA_SAPLING);
         materials.add(Material.ACACIA_BOAT);
         materials.add(Material.ACACIA_CHEST_BOAT);
 
@@ -241,6 +275,28 @@ public class BrownTeamMaterials {
         materials.add(Material.WOODEN_AXE);
         materials.add(Material.WOODEN_SHOVEL);
         materials.add(Material.WOODEN_HOE);
+
+        materials.add(Material.BOOKSHELF);
+        materials.add(Material.LECTERN);
+        materials.add(Material.CRAFTING_TABLE);
+
+        materials.add(Material.BIRCH_LOG);
+        materials.add(Material.BIRCH_WOOD);
+        materials.add(Material.STRIPPED_BIRCH_LOG);
+        materials.add(Material.STRIPPED_BIRCH_WOOD);
+        materials.add(Material.BIRCH_PLANKS);
+        materials.add(Material.BIRCH_SLAB);
+        materials.add(Material.BIRCH_STAIRS);
+        materials.add(Material.BIRCH_FENCE);
+        materials.add(Material.BIRCH_FENCE_GATE);
+        materials.add(Material.BIRCH_DOOR);
+        materials.add(Material.BIRCH_TRAPDOOR);
+        materials.add(Material.BIRCH_SIGN);
+        materials.add(Material.BIRCH_HANGING_SIGN);
+        materials.add(Material.BIRCH_BUTTON);
+        materials.add(Material.BIRCH_PRESSURE_PLATE);
+        materials.add(Material.BIRCH_BOAT);
+        materials.add(Material.BIRCH_CHEST_BOAT);
 
         return materials;
     }

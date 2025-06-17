@@ -46,7 +46,6 @@ public class GreenTeamMaterials {
         materials.add(Material.SHORT_GRASS);
         materials.add(Material.MOSS_BLOCK);
         materials.add(Material.MOSS_CARPET);
-        materials.add(Material.MYCELIUM);
 
         materials.add(Material.OAK_LEAVES);
         materials.add(Material.SPRUCE_LEAVES);
@@ -69,58 +68,6 @@ public class GreenTeamMaterials {
         materials.add(Material.CHERRY_SAPLING);
         materials.add(Material.AZALEA);
         materials.add(Material.FLOWERING_AZALEA);
-
-        materials.add(Material.OAK_LOG);
-        materials.add(Material.SPRUCE_LOG);
-        materials.add(Material.JUNGLE_LOG);
-        materials.add(Material.OAK_WOOD);
-        materials.add(Material.SPRUCE_WOOD);
-        materials.add(Material.JUNGLE_WOOD);
-        materials.add(Material.STRIPPED_OAK_LOG);
-        materials.add(Material.STRIPPED_SPRUCE_LOG);
-        materials.add(Material.STRIPPED_JUNGLE_LOG);
-        materials.add(Material.STRIPPED_OAK_WOOD);
-        materials.add(Material.STRIPPED_SPRUCE_WOOD);
-        materials.add(Material.STRIPPED_JUNGLE_WOOD);
-        materials.add(Material.OAK_PLANKS);
-        materials.add(Material.SPRUCE_PLANKS);
-        materials.add(Material.JUNGLE_PLANKS);
-        materials.add(Material.OAK_SLAB);
-        materials.add(Material.SPRUCE_SLAB);
-        materials.add(Material.JUNGLE_SLAB);
-        materials.add(Material.OAK_STAIRS);
-        materials.add(Material.SPRUCE_STAIRS);
-        materials.add(Material.JUNGLE_STAIRS);
-        materials.add(Material.OAK_FENCE);
-        materials.add(Material.SPRUCE_FENCE);
-        materials.add(Material.JUNGLE_FENCE);
-        materials.add(Material.OAK_FENCE_GATE);
-        materials.add(Material.SPRUCE_FENCE_GATE);
-        materials.add(Material.JUNGLE_FENCE_GATE);
-        materials.add(Material.OAK_DOOR);
-        materials.add(Material.SPRUCE_DOOR);
-        materials.add(Material.JUNGLE_DOOR);
-        materials.add(Material.OAK_TRAPDOOR);
-        materials.add(Material.SPRUCE_TRAPDOOR);
-        materials.add(Material.JUNGLE_TRAPDOOR);
-        materials.add(Material.OAK_SIGN);
-        materials.add(Material.SPRUCE_SIGN);
-        materials.add(Material.JUNGLE_SIGN);
-        materials.add(Material.OAK_HANGING_SIGN);
-        materials.add(Material.SPRUCE_HANGING_SIGN);
-        materials.add(Material.JUNGLE_HANGING_SIGN);
-        materials.add(Material.OAK_BUTTON);
-        materials.add(Material.SPRUCE_BUTTON);
-        materials.add(Material.JUNGLE_BUTTON);
-        materials.add(Material.OAK_PRESSURE_PLATE);
-        materials.add(Material.SPRUCE_PRESSURE_PLATE);
-        materials.add(Material.JUNGLE_PRESSURE_PLATE);
-        materials.add(Material.OAK_BOAT);
-        materials.add(Material.SPRUCE_BOAT);
-        materials.add(Material.JUNGLE_BOAT);
-        materials.add(Material.OAK_CHEST_BOAT);
-        materials.add(Material.SPRUCE_CHEST_BOAT);
-        materials.add(Material.JUNGLE_CHEST_BOAT);
 
         materials.add(Material.CACTUS);
         materials.add(Material.SUGAR_CANE);
@@ -166,7 +113,6 @@ public class GreenTeamMaterials {
         materials.add(Material.ZOMBIE_VILLAGER_SPAWN_EGG);
         materials.add(Material.HUSK_SPAWN_EGG);
         materials.add(Material.DROWNED_SPAWN_EGG);
-        materials.add(Material.ZOMBIFIED_PIGLIN_SPAWN_EGG);
 
         materials.add(Material.MELON);
         materials.add(Material.MELON_SLICE);
@@ -180,19 +126,11 @@ public class GreenTeamMaterials {
         materials.add(Material.WHEAT);
         materials.add(Material.WHEAT_SEEDS);
         materials.add(Material.BEETROOT_SEEDS);
-        materials.add(Material.POTATO);
-        materials.add(Material.POISONOUS_POTATO);
-        materials.add(Material.CARROT);
-        materials.add(Material.GOLDEN_CARROT);
         materials.add(Material.APPLE);
-        materials.add(Material.GOLDEN_APPLE);
-        materials.add(Material.ENCHANTED_GOLDEN_APPLE);
 
         materials.add(Material.DANDELION);
         materials.add(Material.POPPY);
-        materials.add(Material.BLUE_ORCHID);
         materials.add(Material.ALLIUM);
-        materials.add(Material.AZURE_BLUET);
         materials.add(Material.RED_TULIP);
         materials.add(Material.ORANGE_TULIP);
         materials.add(Material.WHITE_TULIP);
@@ -200,7 +138,6 @@ public class GreenTeamMaterials {
         materials.add(Material.OXEYE_DAISY);
         materials.add(Material.CORNFLOWER);
         materials.add(Material.LILY_OF_THE_VALLEY);
-        materials.add(Material.WITHER_ROSE);
         materials.add(Material.SUNFLOWER);
         materials.add(Material.LILAC);
         materials.add(Material.ROSE_BUSH);
@@ -220,7 +157,6 @@ public class GreenTeamMaterials {
         materials.add(Material.VILLAGER_SPAWN_EGG);
         materials.add(Material.WANDERING_TRADER_SPAWN_EGG);
         materials.add(Material.WITCH_SPAWN_EGG);
-        materials.add(Material.SILVERFISH_SPAWN_EGG);
         materials.add(Material.GUARDIAN_SPAWN_EGG);
         materials.add(Material.ELDER_GUARDIAN_SPAWN_EGG);
 
@@ -237,7 +173,6 @@ public class GreenTeamMaterials {
         materials.add(Material.WARPED_FUNGUS);
         materials.add(Material.WARPED_ROOTS);
         materials.add(Material.WARPED_NYLIUM);
-        materials.add(Material.WARPED_WART_BLOCK);
         materials.add(Material.CRIMSON_FUNGUS);
         materials.add(Material.CRIMSON_ROOTS);
         materials.add(Material.CRIMSON_NYLIUM);
@@ -252,37 +187,6 @@ public class GreenTeamMaterials {
         materials.add(Material.END_PORTAL_FRAME);
         materials.add(Material.ENDER_EYE);
         materials.add(Material.ENDER_PEARL);
-
-        materials.add(Material.BOOK);
-        materials.add(Material.WRITABLE_BOOK);
-        materials.add(Material.WRITTEN_BOOK);
-        materials.add(Material.ENCHANTED_BOOK);
-        materials.add(Material.BOOKSHELF);
-        materials.add(Material.LECTERN);
-
-        materials.add(Material.CHEST);
-        materials.add(Material.TRAPPED_CHEST);
-        materials.add(Material.ENDER_CHEST);
-        materials.add(Material.BARREL);
-        materials.add(Material.CRAFTING_TABLE);
-        materials.add(Material.CARTOGRAPHY_TABLE);
-        materials.add(Material.FLETCHING_TABLE);
-        materials.add(Material.SMITHING_TABLE);
-        materials.add(Material.LOOM);
-        materials.add(Material.COMPOSTER);
-        materials.add(Material.SMOKER);
-        materials.add(Material.BLAST_FURNACE);
-        materials.add(Material.FURNACE);
-
-        materials.add(Material.HAY_BLOCK);
-        materials.add(Material.TARGET);
-        materials.add(Material.SCAFFOLDING);
-        materials.add(Material.LADDER);
-        materials.add(Material.PISTON);
-        materials.add(Material.STICKY_PISTON);
-        materials.add(Material.OBSERVER);
-        materials.add(Material.NOTE_BLOCK);
-        materials.add(Material.JUKEBOX);
 
         materials.add(Material.WEATHERED_COPPER);
         materials.add(Material.WEATHERED_CUT_COPPER);
@@ -314,9 +218,7 @@ public class GreenTeamMaterials {
 
         materials.add(Material.POTTED_DANDELION);
         materials.add(Material.POTTED_POPPY);
-        materials.add(Material.POTTED_BLUE_ORCHID);
         materials.add(Material.POTTED_ALLIUM);
-        materials.add(Material.POTTED_AZURE_BLUET);
         materials.add(Material.POTTED_RED_TULIP);
         materials.add(Material.POTTED_ORANGE_TULIP);
         materials.add(Material.POTTED_WHITE_TULIP);
@@ -324,7 +226,6 @@ public class GreenTeamMaterials {
         materials.add(Material.POTTED_OXEYE_DAISY);
         materials.add(Material.POTTED_CORNFLOWER);
         materials.add(Material.POTTED_LILY_OF_THE_VALLEY);
-        materials.add(Material.POTTED_WITHER_ROSE);
         materials.add(Material.POTTED_OAK_SAPLING);
         materials.add(Material.POTTED_SPRUCE_SAPLING);
         materials.add(Material.POTTED_BIRCH_SAPLING);
