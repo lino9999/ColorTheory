@@ -1,0 +1,6 @@
+name: ColorTheory
+version: '1.0'
+main: com.Lino.colorTheory.ColorTheory
+api-version: '1.21'
+author: Lino
+description: A plugin that restricts players to using blocks and items of their chosen team color
